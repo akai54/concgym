@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class MachineType {
+public enum MachineType {
     LEGPRESSMACHINE("Leg Press"),
     HALTERE("Haltère"),
     SQUATMACHINE("Squat Machine"),
