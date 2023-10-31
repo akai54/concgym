@@ -15,7 +15,7 @@ public class Exercise {
         poidsSet.put(Poids.LARGE_25KG, 0);
 
         for (int i = 0; i < 10; i++) {
-            Poids randPlate = Poids.getRandomWeight();
+            Poids randPlate = Poids.getRandomPoids();
             int rand = new Random().nextInt(4);
             if (rand < 3) {
                 poidsSet.replace(randPlate, poidsSet.get(randPlate) + 1);
@@ -31,8 +31,8 @@ public class Exercise {
 
     @Override
     public String toString() {
-        int poidsTotal = (this.poids.get(Poids.SMALL_5KG) * 5) + (this.poids.get(Poids.MEDIUM_10KG) * 10) + (this.poids.get(Poids.LARGE_25LBS) * 25);
-        String weightsMessage = poidsTotal + " kg of total weight consisting of " + this.poids.get(Poids.SMALL_5KG) + " x 5 kg poids, " + this.poids.get(Poids.MEDIUM_10LBS) + " x 10 kg poids, " + this.poids.get(Poids.LARGE_25LBS) + " x 25 kg poids.";
+        int poidsTotal = (this.poids.get(Poids.SMALL_5KG) * 5) + (this.poids.get(Poids.MEDIUM_10KG) * 10) + (this.poids.get(Poids.LARGE_25KG) * 25);
+        String weightsMessage = poidsTotal + " kg of total weight consisting of " + this.poids.get(Poids.SMALL_5KG) + " x 5 kg poids, " + this.poids.get(Poids.MEDIUM_10KG) + " x 10 kg poids, " + this.poids.get(Poids.LARGE_25KG) + " x 25 kg poids.";
         return this.machine.machineName + " with " + weightsMessage + "\n";
     }
 }
