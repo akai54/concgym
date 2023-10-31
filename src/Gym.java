@@ -26,8 +26,33 @@ public class Gym {
                     });
                 }).collect(Collectors.toList());
 
+        Thread supervisor = new Thread(createSupervisor(gymMembresProgramme));
+        supervisor.start();
+
         gymMembresProgramme.forEach((t) -> t.start());
 
+    }
 
+    /* Ce thread contient les noms des threads encore actifs */
+    private Thread createSupervisor(List<Thread> threads) {
+        Thread supervisor = new Thread(() -> {
+            while (true) {
+                List<String> runningThreads;
+                runningThreads = threads.stream().filter(Thread::isAlive).map(Thread::getName).collect(Collectors.toList());
+                System.out.println(Thread.currentThread().getName() + " - " + runningThreads.size() + " members currently exercising: " + runningThreads + "\n");
+
+                if (runningThreads.isEmpty()) break;
+
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    System.out.println("Interrupted");
+                }
+            }
+            System.out.println(Thread.currentThread().getName() + "All members have finished exercising");
+        });
+
+        supervisor.setName("Gym Personnels");
+        return supervisor;
     }
 }
