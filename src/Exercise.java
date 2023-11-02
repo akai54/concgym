@@ -32,7 +32,7 @@ public class Exercise {
     @Override
     public String toString() {
         int poidsTotal = (this.poids.get(Poids.SMALL_5KG) * 5) + (this.poids.get(Poids.MEDIUM_10KG) * 10) + (this.poids.get(Poids.LARGE_25KG) * 25);
-        String weightsMessage = poidsTotal + " kg of total weight consisting of " + this.poids.get(Poids.SMALL_5KG) + " x 5 kg poids, " + this.poids.get(Poids.MEDIUM_10KG) + " x 10 kg poids, " + this.poids.get(Poids.LARGE_25KG) + " x 25 kg poids.";
-        return this.machine.machineName + " with " + weightsMessage + "\n";
+        String weightsMessage = poidsTotal + "kg de poids total consistant de " + this.poids.get(Poids.SMALL_5KG) + " x 5 kg poids, " + this.poids.get(Poids.MEDIUM_10KG) + " x 10 kg poids, " + this.poids.get(Poids.LARGE_25KG) + " x 25 kg poids.";
+        return this.machine.machineName + " avec " + weightsMessage + "\n";
     }
 }

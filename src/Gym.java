@@ -12,26 +12,29 @@ public class Gym {
         this.totalGymMembers = totalGymMembers;
     }
 
-    public void openAjd(){
+    public void openAjd() {
         List<Thread> gymMembresProgramme;
         gymMembresProgramme = IntStream.rangeClosed(1, this.totalGymMembers)
                 .mapToObj((id) -> {
                     Member member = new Member(id);
-                    return new Thread(() -> {
-                       try {
-                           member.performRoutine();
-                       }catch (Exception e) {
-                           System.out.println(e);
-                       }
+                    Thread memberThread = new Thread(() -> {
+                        try {
+                            member.performRoutine();
+                        } catch (Exception e) {
+                            System.out.println(e);
+                        }
                     });
+                    memberThread.setName("Member " + id); // Setting the thread name
+                    return memberThread;
                 }).collect(Collectors.toList());
 
         Thread supervisor = new Thread(createSupervisor(gymMembresProgramme));
+        supervisor.setName("Supervisor");
         supervisor.start();
 
-        gymMembresProgramme.forEach((t) -> t.start());
-
+        gymMembresProgramme.forEach(Thread::start);
     }
+
 
     /* Ce thread contient les noms des threads encore actifs */
     private Thread createSupervisor(List<Thread> threads) {
@@ -49,7 +52,7 @@ public class Gym {
                     System.out.println("Interrupted");
                 }
             }
-            System.out.println(Thread.currentThread().getName() + "All members have finished exercising");
+            System.out.println(Thread.currentThread().getName() + " Tout les membres ont finit leurs entrainement");
         });
 
         supervisor.setName("Gym Personnels");
